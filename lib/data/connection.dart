@@ -13,6 +13,7 @@ class Connections {
   Terminal terminal;
   String arrDelay;
   String depDelay;
+  String track;
 
   Connections(
       {this.time,
@@ -30,6 +31,7 @@ class Connections {
 
   Connections.fromJson(Map<String, dynamic> json) {
     time = json['time'];
+    time = time.substring(11, 16);
     g = json['*G'];
     l = json['*L'];
     type = json['type'];
@@ -43,6 +45,7 @@ class Connections {
         : null;
     arrDelay = json['arr_delay'];
     depDelay = json['dep_delay'];
+    track = json['track'];
   }
 
   Map<String, dynamic> toJson() {
@@ -61,6 +64,7 @@ class Connections {
     }
     data['arr_delay'] = this.arrDelay;
     data['dep_delay'] = this.depDelay;
+    data['track'] = this.track;
     return data;
   }
 }

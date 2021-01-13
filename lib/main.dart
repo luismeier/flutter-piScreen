@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:piScreen/data/connection.dart';
 import 'package:piScreen/data/station.dart';
 
-import 'package:flutter/material.dart';
+import 'package:piScreen/ui/widgets/connection_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,7 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
   Future<Station> futureConnection;
 
@@ -50,11 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Timer.periodic(Duration(seconds: 1), (Timer t) => fetchStation());
   }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,13 +71,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: snapshot.data.connections.length,
                   itemBuilder: (context, index) {
                     Connections connection = snapshot.data.connections[index];
-                    return Row(
-                      children: <Widget>[
-                        Text("${connection.line}\t\tRichtung: \t ${connection.terminal.name} \n Abfahrt: ${connection.time}"),
-                          SizedBox(),
-                        Text(connection.arrDelay.toString())
-                      ],
+                    return new ConnectionWidget(
+                      destination: connection.terminal.name,
+                      line: connection.line,
+                      depDelay: connection.depDelay,
+                      time: connection.time,
+                      trackNumber: connection.track,
                     );
+
                   },
                 );
               } else if (snapshot.hasError) {
@@ -101,14 +97,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Future<Station> fetchStation() async {
   final response = await http.get(
-      'https://fahrplan.search.ch/api/stationboard.json?stop=8503020&show_delays=true&mode=depart');
+      'https://fahrplan.search.ch/api/stationboard.json?stop=8503020&show_trackchanges=true&show_delays=true&mode=depart&show_tracks=true');
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    
-    return Station.fromJson(jsonDecode(response.body));
 
+    return Station.fromJson(jsonDecode(response.body));
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
