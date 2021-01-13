@@ -1,16 +1,21 @@
-# piScreen
+# flutter-piScreen
 
-A new Flutter project.
+Flutter-PiScreen is a WIP timetable for swiss transportation (SBB) which will show the next leaving trains from a given station. This includes delays and potentially platform changes.  
 
-## Getting Started
+This project is intended to run on the official [Raspberry Pi Touch Display](https://www.raspberrypi.org/products/raspberry-pi-touch-display/). Although it should run on any platform, that supports flutter.
 
-This project is a starting point for a Flutter application.
+## Build
+1. Clone repository  
+`$ git clone git@github.com:luismeier/flutter-piScreen.git && cd flutter-piScreen`
+2. Get Flutter packages  
+`$ flutter pub get`
+3. Build  
+`$ flutter build bundle`
+4. Copy to pi
+`$ rsync -a ./build/flutter_assets/ pi@raspberrypi:/home/pi/piScreen`
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+##  Run
+To run flutter on the RaspberryPi use the awesome [flutter-pi](https://github.com/ardera/flutter-pi) project by ardera.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
