@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String _formatTime(DateTime dateTime) {
-    return DateFormat('hh:mm:ss').format(dateTime);
+    return DateFormat('HH:mm:ss').format(dateTime);
   }
 
   String _formatDate(DateTime dateTime) {
