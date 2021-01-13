@@ -29,15 +29,15 @@ class ConnectionWidget extends StatelessWidget {
               width: 50,
               child: Text(
                 this.line,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(width: 10),
-            Expanded(
-                          child: Text(this.destination,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            ),
+            SizedBox(width: 5),
             Text(this.time, style: TextStyle(fontSize: 20)),
+            Expanded(
+              child: Text(this.destination,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ),
             this.depDelay == null
                 ? Text("")
                 : Text(
@@ -47,8 +47,8 @@ class ConnectionWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
-                  SizedBox(width: 10),
-            Text("Gleis: $trackNumber",style: TextStyle(fontSize: 20))
+            SizedBox(width: 10),
+            Text("Gleis: $trackNumber", style: TextStyle(fontSize: 20))
           ],
         ),
       )),

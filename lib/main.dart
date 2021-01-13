@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:piScreen/data/connection.dart';
 import 'package:piScreen/data/station.dart';
 
@@ -39,28 +40,59 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   Future<Station> futureConnection;
+  String _timeString;
+  String _datumString;
 
   @override
   void initState() {
     super.initState();
+    _timeString =
+        "${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}";
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
     futureConnection = fetchStation();
-    Timer.periodic(Duration(seconds: 1), (Timer t) => fetchStation());
   }
 
+  void _getTime() {
+    final DateTime now = DateTime.now();
+    final String formattedTime = _formatTime(now);
+    final String formattedDate = _formatDate(now);
+    setState(() {
+      _timeString = formattedTime;
+      _datumString = formattedDate;
+    });
+  }
 
+  String _formatTime(DateTime dateTime) {
+    return DateFormat('hh:mm:ss').format(dateTime);
+  }
+
+  String _formatDate(DateTime dateTime) {
+    return DateFormat('dd.MM.yyyy').format(dateTime);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fetch Data Example',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Fetch Data Example'),
+          title: Column(
+            children: [
+              Text(
+                _timeString,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 4),
+              Text(
+                _datumString,
+                style: TextStyle(fontSize: 12),
+              )
+            ],
+          ),
+          centerTitle: true,
         ),
         body: Center(
           child: FutureBuilder<Station>(
@@ -78,7 +110,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       time: connection.time,
                       trackNumber: connection.track,
                     );
-
                   },
                 );
               } else if (snapshot.hasError) {
@@ -96,8 +127,9 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 Future<Station> fetchStation() async {
+  print("Calling server");
   final response = await http.get(
-      'https://fahrplan.search.ch/api/stationboard.json?stop=8503020&show_trackchanges=true&show_delays=true&mode=depart&show_tracks=true');
+      'https://fahrplan.search.ch/api/stationboard.json?stop=8503020&show_trackchanges=true&show_delays=true&mode=depart&show_tracks=true&limit=30');
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -107,7 +139,9 @@ Future<Station> fetchStation() async {
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception('Failed to load album');
+
+    throw Exception(
+        'Failed to load!\n ${response.statusCode} - ${response.body}');
   }
 }
 
