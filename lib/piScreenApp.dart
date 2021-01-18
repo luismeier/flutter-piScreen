@@ -9,9 +9,11 @@ class PiScreenApp extends StatelessWidget {
     return MaterialApp(
       title: 'piScreen',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          textTheme: Theme.of(context).textTheme.apply(
+                fontSizeFactor: 0.9,
+              )),
       home: HomeScreen(),
     );
   }
