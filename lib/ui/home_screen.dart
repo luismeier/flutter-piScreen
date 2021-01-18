@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:piScreen/providers/timetable_provider.dart';
 import 'package:piScreen/ui/timtable_view.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -47,7 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: MediaQuery.of(context).size.height * 0.1,
           title: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 _timeString,
@@ -72,10 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               color: Colors.blue,
               child: SizedBox(
-                width: MediaQuery.of(context).size.width / 2,
+                  width: MediaQuery.of(context).size.width * 0.5,
                 height: MediaQuery.of(context).size.height -
                     MediaQuery.of(context).padding.top,
-              ),
+                  child: Center(
+                    child: Icon(Icons.cloud),
+                  )),
             )
           ],
         ));
