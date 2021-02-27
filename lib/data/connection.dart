@@ -44,7 +44,10 @@ class Connections {
         ? new Terminal.fromJson(json['terminal'])
         : null;
     arrDelay = json['arr_delay'];
-    depDelay = json['dep_delay'];
+    // Filtering out "+0" and +1 delay times
+    depDelay = (json['dep_delay'] == "+1" || json['dep_delay'] == "+0")
+        ? null
+        : json['dep_delay'];
     track = json['track'];
   }
 
@@ -68,5 +71,3 @@ class Connections {
     return data;
   }
 }
-
-

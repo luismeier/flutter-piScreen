@@ -24,14 +24,14 @@ class ConnectionWidget extends StatelessWidget {
       ),
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               timeWidget(context),
               SizedBox(width: 5),
               SizedBox(
-                width: 28,
+                width: 40,
                 child: Text(
                   this.line,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -59,21 +59,24 @@ class ConnectionWidget extends StatelessWidget {
   }
 
   Widget timeWidget(BuildContext context) {
-    return Column(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
           this.time,
         ),
-        this.depDelay == null
-            ? Text("")
-            : Text(
-                "$depDelay\'",
-                style: TextStyle(
-                  color: Theme.of(context).errorColor,
-                  fontStyle: FontStyle.italic,
+        SizedBox(
+          width: 30,
+          child: this.depDelay == null
+              ? Text("")
+              : Text(
+                  "$depDelay\'",
+                  style: TextStyle(
+                    color: Theme.of(context).errorColor,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
-              ),
+        ),
       ],
     );
   }

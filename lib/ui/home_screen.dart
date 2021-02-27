@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:piScreen/ui/timtable_view.dart';
+import 'package:piScreen/ui/weather_view.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _formatTime(DateTime dateTime) {
     return DateFormat('HH:mm:ss').format(dateTime);
+    // return DateFormat.Hm().format(dateTime);
   }
 
   String _formatDate(DateTime dateTime) {
@@ -53,11 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 _timeString,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 4),
               Text(
                 _datumString,
                 style: TextStyle(fontSize: 12),
-              )
+              ),
             ],
           ),
           centerTitle: true,
@@ -73,11 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.blue,
               child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top,
-                  child: Center(
-                    child: Icon(Icons.cloud),
-                  )),
+                  height: MediaQuery.of(context).size.height -
+                      MediaQuery.of(context).padding.top,
+                  child: Center(child: WeatherView())),
             )
           ],
         ));
