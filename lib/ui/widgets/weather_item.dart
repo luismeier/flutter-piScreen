@@ -11,7 +11,7 @@ class WeatherItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
+        padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
