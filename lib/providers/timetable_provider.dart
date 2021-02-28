@@ -11,6 +11,10 @@ class TimeTableProvider extends ChangeNotifier {
 
   get station => _station;
 
+  void update() {
+    _fetchStation();
+  }
+
   TimeTableProvider() {
     _fetchStation();
     Timer.periodic(Duration(seconds: 30), (Timer t) => _fetchStation());

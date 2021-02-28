@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:piScreen/providers/weather_provider.dart';
 import 'package:piScreen/ui/timtable_view.dart';
 import 'package:piScreen/ui/weather_view.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -45,9 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final weatherProvider = Provider.of<WeatherProvider>(context);
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: MediaQuery.of(context).size.height * 0.1,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -62,13 +64,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: weatherProvider.update,
+            )
+          ],
         ),
         body: Row(
           children: <Widget>[
             Expanded(
-              child: Container(
-                child: TimeTableView(),
-              ),
+              child: TimeTableView(),
             ),
             Container(
               color: Colors.blue,

@@ -16,20 +16,27 @@ class WeatherProvider extends ChangeNotifier {
   String units = "metric";
   String apiKey = "0721392c0ba0af8c410aa9394defa29e";
   String url = "https://api.openweathermap.org/data/2.5/";
+  String language = "de";
+  int forecastLength = 7;
 
-  WeatherProvider() {
-    loadWeather();
-    Timer.periodic(Duration(hours: 1), (Timer t) => loadWeather());
+  void update() {
+    _loadWeather();
   }
 
-  void loadWeather() async {
+  WeatherProvider() {
+    _loadWeather();
+    Timer.periodic(Duration(minutes: 20), (Timer t) => _loadWeather());
+  }
+
+  void _loadWeather() async {
+    print("Loading Weather");
     isLoading = true;
     notifyListeners();
 
     final weatherResponse = await http
-        .get('$url/weather?APPID=$apiKey&q=$city&units=$units&lang=de');
+        .get('$url/weather?APPID=$apiKey&q=$city&units=$units&lang=$language');
     final forecastResponse = await http.get(
-        'https://api.openweathermap.org/data/2.5/forecast/daily?q=zuerich&units=metric&cnt=7&appid=0721392c0ba0af8c410aa9394defa29e&lang=de');
+        '$url/forecast/daily?q=$city&units=$units&cnt=$forecastLength&appid=$apiKey&lang=$language');
 
     if (weatherResponse.statusCode == 200)
       weatherData = new WeatherData.fromJson(jsonDecode(weatherResponse.body));
