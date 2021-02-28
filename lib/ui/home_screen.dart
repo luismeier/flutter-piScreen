@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:piScreen/providers/timetable_provider.dart';
 import 'package:piScreen/providers/weather_provider.dart';
 import 'package:piScreen/ui/timtable_view.dart';
 import 'package:piScreen/ui/weather_view.dart';
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final weatherProvider = Provider.of<WeatherProvider>(context);
+    final timeTableProvider = Provider.of<TimeTableProvider>(context);
     return Scaffold(
         appBar: AppBar(
           title: Column(
@@ -67,8 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.refresh),
-              onPressed: weatherProvider.update,
-            )
+                onPressed: () {
+                  weatherProvider.update();
+                  timeTableProvider.update();
+                })
           ],
         ),
         body: Row(
