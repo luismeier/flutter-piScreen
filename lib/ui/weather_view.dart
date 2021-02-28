@@ -16,9 +16,15 @@ class WeatherView extends StatelessWidget {
       child: Column(children: <Widget>[
         Expanded(
           child: provider.isLoading
-              ? CircularProgressIndicator(
-                  strokeWidth: 2.0,
-                  valueColor: new AlwaysStoppedAnimation(Colors.white),
+              ? Center(
+                  child: SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 4.0,
+                      valueColor: new AlwaysStoppedAnimation(Colors.white),
+                    ),
+                  ),
                 )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
