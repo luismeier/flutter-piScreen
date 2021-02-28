@@ -22,6 +22,9 @@ class ForecastData {
       list.add(w);
     }
 
+    // Remove the first entry as it is today
+    list.removeAt(0);
+
     return ForecastData(list);
   }
 }
