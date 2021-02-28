@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:piScreen/providers/timetable_provider.dart';
 import 'package:piScreen/providers/weather_provider.dart';
+import 'package:piScreen/ui/settings_screen.dart';
 import 'package:piScreen/ui/timtable_view.dart';
 import 'package:piScreen/ui/weather_view.dart';
 import 'package:provider/provider.dart';
@@ -66,9 +67,18 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           centerTitle: true,
+          leading: IconButton(
+              icon: new Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SettingsScreen(),
+                    ));
+              }),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.refresh),
+                icon: Icon(Icons.refresh),
                 onPressed: () {
                   weatherProvider.update();
                   timeTableProvider.update();
@@ -80,8 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: Container(
                 color: Colors.blue,
-              child: TimeTableView(),
-            ),
+                child: TimeTableView(),
+              ),
             ),
             Container(
               color: Colors.blue,
