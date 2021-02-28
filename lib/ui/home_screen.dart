@@ -74,14 +74,15 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Row(
           children: <Widget>[
             Expanded(
+              child: Container(
+                color: Colors.blue,
               child: TimeTableView(),
+            ),
             ),
             Container(
               color: Colors.blue,
               child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.height -
-                      MediaQuery.of(context).padding.top,
                   child: Center(child: WeatherView())),
             )
           ],

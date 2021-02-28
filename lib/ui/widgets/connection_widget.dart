@@ -18,10 +18,7 @@ class ConnectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(),
-      ),
+    return Card(
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
