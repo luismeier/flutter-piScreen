@@ -17,11 +17,17 @@ class WeatherItem extends StatelessWidget {
           children: <Widget>[
             Text(new DateFormat('dd.MM').format(weather.date)),
             Text(weather.main),
-            // Text('${weather.temp.toString()}°C'),
-            Text(
-                "min: ${weather.temp_min.toString()}°C, max: ${weather.temp_max.toString()}°C"),
             Image.network(
                 'https://openweathermap.org/img/w/${weather.icon}.png'),
+            Row(
+              children: <Widget>[
+                Icon(Icons.arrow_downward),
+                Text("${weather.temp_min.toString()}°C"),
+                SizedBox(width: 5),
+                Icon(Icons.arrow_upward),
+                Text("${weather.temp_max.toString()}°C"),
+              ],
+            ),
           ],
         ),
       ),
