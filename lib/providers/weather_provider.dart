@@ -19,7 +19,7 @@ class WeatherProvider extends ChangeNotifier {
 
   WeatherProvider() {
     loadWeather();
-    Timer.periodic(Duration(hours: 2), (Timer t) => loadWeather());
+    Timer.periodic(Duration(hours: 1), (Timer t) => loadWeather());
   }
 
   void loadWeather() async {
