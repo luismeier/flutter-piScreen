@@ -11,9 +11,9 @@ class WeatherItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 0.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.,
           children: <Widget>[
             Text(new DateFormat('dd.MM').format(weather.date)),
             Text(weather.main),
@@ -22,10 +22,10 @@ class WeatherItem extends StatelessWidget {
             Row(
               children: <Widget>[
                 Icon(Icons.arrow_downward),
-                Text("${weather.temp_min.toString()}°C"),
+                Text("${weather.tempMin.toString()}°C"),
                 SizedBox(width: 5),
                 Icon(Icons.arrow_upward),
-                Text("${weather.temp_max.toString()}°C"),
+                Text("${weather.tempMax.toString()}°C"),
               ],
             ),
           ],

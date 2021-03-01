@@ -1,5 +1,5 @@
-import 'package:piScreen/data/connection.dart';
-import 'package:piScreen/data/stop.dart';
+import 'package:piScreen/models/connection_model.dart';
+import 'package:piScreen/models/stop_model.dart';
 
 class Station {
   Stop stop;
@@ -19,18 +19,5 @@ class Station {
     }
     request = json['request'];
     eof = json['eof'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.stop != null) {
-      data['stop'] = this.stop.toJson();
-    }
-    if (this.connections != null) {
-      data['connections'] = this.connections.map((v) => v.toJson()).toList();
-    }
-    data['request'] = this.request;
-    data['eof'] = this.eof;
-    return data;
   }
 }

@@ -2,12 +2,12 @@ class WeatherData {
   final DateTime date;
   final String name;
   final int temp;
-  final int temp_min;
-  final int temp_max;
+  final int tempMin;
+  final int tempMax;
   final String main;
   final String icon;
 
-  WeatherData(this.date, this.name, this.temp, this.temp_min, this.temp_max,
+  WeatherData(this.date, this.name, this.temp, this.tempMin, this.tempMax,
       this.main, this.icon);
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {

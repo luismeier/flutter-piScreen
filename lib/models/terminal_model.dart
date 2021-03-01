@@ -16,15 +16,4 @@ class Terminal {
     lon = json['lon'];
     lat = json['lat'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['x'] = this.x;
-    data['y'] = this.y;
-    data['lon'] = this.lon;
-    data['lat'] = this.lat;
-    return data;
-  }
 }

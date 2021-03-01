@@ -1,4 +1,4 @@
-import 'package:piScreen/data/terminal.dart';
+import 'package:piScreen/models/terminal_model.dart';
 
 class Connections {
   String time;
@@ -49,25 +49,5 @@ class Connections {
         ? null
         : json['dep_delay'];
     track = json['track'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['time'] = this.time;
-    data['*G'] = this.g;
-    data['*L'] = this.l;
-    data['type'] = this.type;
-    data['line'] = this.line;
-    data['operator'] = this.operator;
-    data['number'] = this.number;
-    data['color'] = this.color;
-    data['type_name'] = this.typeName;
-    if (this.terminal != null) {
-      data['terminal'] = this.terminal.toJson();
-    }
-    data['arr_delay'] = this.arrDelay;
-    data['dep_delay'] = this.depDelay;
-    data['track'] = this.track;
-    return data;
   }
 }

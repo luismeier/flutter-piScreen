@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:piScreen/models/forecast_model.dart';
 import 'package:piScreen/providers/weather_provider.dart';
 import 'package:piScreen/ui/widgets/weather_item.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +37,7 @@ class WeatherView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                          height: 200.0,
+                          height: 135.0,
                           child: provider.forecastData != null
                               ? ListView.builder(
                                   itemCount: provider.forecastData.list.length,
