@@ -21,6 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> fetch() async {
     prefs = await SharedPreferences.getInstance();
     _timetableInterval = prefs.getInt('counter');
+    _showTrains = prefs.getBool('showTrains') ?? false;
     setState(() {});
   }
 
@@ -75,6 +76,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: (value) {
                 setState(() {
                   _showTrains = value;
+                  prefs.setBool('showTrains', value);
                 });
               },
             ),
