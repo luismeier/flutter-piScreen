@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-import '../data/station.dart';
+import '../models/station_model.dart';
 
 class TimeTableProvider extends ChangeNotifier {
   Station _station;

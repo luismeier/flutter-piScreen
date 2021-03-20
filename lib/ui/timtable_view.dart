@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:piScreen/providers/timetable_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../data/connection.dart';
+import '../models/connection_model.dart';
 import 'widgets/connection_widget.dart';
 
 class TimeTableView extends StatelessWidget {
