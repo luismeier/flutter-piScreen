@@ -12,7 +12,7 @@ class PiScreenApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: Theme.of(context).textTheme.apply(
-                fontSizeFactor: 1.4,
+              // fontSizeFactor: 0.8,
               )),
       home: HomeScreen(),
     );

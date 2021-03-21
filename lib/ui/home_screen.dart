@@ -51,8 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final weatherProvider = Provider.of<WeatherProvider>(context);
     final timeTableProvider = Provider.of<TimeTableProvider>(context);
+
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
+          toolbarHeight: MediaQuery.of(context).size.height * 0.1,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

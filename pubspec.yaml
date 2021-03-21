@@ -27,6 +27,7 @@ dependencies:
   intl:
   provider: ^4.3.2+4
   shared_preferences: ^2.0.5
+  flutter_typeahead: ^2.0.0
 
   
 

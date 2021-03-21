@@ -28,16 +28,25 @@ class TimeTableView extends StatelessWidget {
             }),
       );
     } else {
-      return Center(
-        child: SizedBox(
-          width: 60,
-          height: 60,
-          child: CircularProgressIndicator(
-            strokeWidth: 4.0,
-            valueColor: new AlwaysStoppedAnimation(Colors.blue),
+      if (provider.errorString.isEmpty) {
+        return Center(
+          child: SizedBox(
+            width: 60,
+            height: 60,
+            child: CircularProgressIndicator(
+              strokeWidth: 4.0,
+              valueColor: new AlwaysStoppedAnimation(Colors.blue),
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        return Center(
+          child: Text(
+            provider.errorString,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          ),
+        );
+      }
     }
   }
 }

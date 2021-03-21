@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:piScreen/ui/stationSelect_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../constants.dart';
 
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({Key key}) : super(key: key);
@@ -20,8 +23,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
   Future<void> fetch() async {
     prefs = await SharedPreferences.getInstance();
-    _timetableInterval = prefs.getInt('counter');
-    _showTrains = prefs.getBool('showTrains') ?? false;
+    _timetableInterval = prefs.getInt(timeTableIntervalKey);
+    _showTrains = prefs.getBool(showTrainsKey) ?? true;
+    _showBuses = prefs.getBool(showBusesKey) ?? true;
+    _showTrams = prefs.getBool(showTramsKey) ?? true;
     setState(() {});
   }
 
@@ -33,6 +38,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: SafeArea(
         child: ListView(children: <Widget>[
+          ListTile(
+              title: Text("Station"),
+              subtitle: Text("Select depart station"),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StationSelect(),
+                    ));
+              }),
           ListTile(
             title: Text("Timetable interval"),
             subtitle: Text("The interval in which the timetable gets updated"),
