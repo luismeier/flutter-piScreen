@@ -2,8 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:piScreen/providers/timetable_provider.dart';
+
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
 
@@ -15,8 +18,10 @@ class StationSelect extends StatefulWidget {
 }
 
 class _StationSelectState extends State<StationSelect> {
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
+    final timeTableProvider = Provider.of<TimeTableProvider>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text("Select Station"),
@@ -29,11 +34,12 @@ class _StationSelectState extends State<StationSelect> {
                   .copyWith(fontStyle: FontStyle.italic),
               decoration: InputDecoration(border: OutlineInputBorder())),
           suggestionsCallback: (pattern) async {
-            final response = await http.get(
+            var url = Uri.parse(
                 "https://fahrplan.search.ch/api/completion.json?term=$pattern&show_ids=true");
+            final response = await http.get(url);
             if (response.statusCode == 200) {
               var list = (jsonDecode(response.body) as List);
-              print(list);
+              // print(list);
               return list;
             }
             return List<dynamic>.empty();
@@ -54,13 +60,14 @@ class _StationSelectState extends State<StationSelect> {
 
             return ListTile(
               leading: myIcon,
-              title: Text(suggestion['label']),
+              title: Text(suggestion['label'] ?? ''),
             );
           },
           onSuggestionSelected: (suggestion) async {
             print("Selected Station $suggestion");
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setString(stationKey, suggestion['id']);
+            box.write(stationKey, suggestion['id']);
+            box.write(stationNameKey, suggestion['label']);
+            timeTableProvider.update(); // Update the timetable
             Navigator.of(context).pop();
           },
         ));

@@ -33,10 +33,13 @@ class WeatherProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final weatherResponse = await http
-        .get('$url/weather?APPID=$apiKey&q=$city&units=$units&lang=$language');
-    final forecastResponse = await http.get(
+    var urlWeather = Uri.parse(
+        '$url/weather?APPID=$apiKey&q=$city&units=$units&lang=$language');
+    var urlForecast = Uri.parse(
         '$url/forecast/daily?q=$city&units=$units&cnt=$forecastLength&appid=$apiKey&lang=$language');
+
+    final weatherResponse = await http.get(urlWeather);
+    final forecastResponse = await http.get(urlForecast);
 
     if (weatherResponse.statusCode == 200)
       weatherData = new WeatherData.fromJson(jsonDecode(weatherResponse.body));

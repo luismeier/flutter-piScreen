@@ -7,9 +7,10 @@ import 'package:http/http.dart' as http;
 import '../constants.dart';
 import '../models/station_model.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 
 class TimeTableProvider extends ChangeNotifier {
+  final box = GetStorage();
   Station _station;
   get station => _station;
 
@@ -27,13 +28,13 @@ class TimeTableProvider extends ChangeNotifier {
 
   void _fetchStation() async {
     print("Calling timetable API");
-    SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String baseURL = "https://fahrplan.search.ch/api/stationboard.json";
-    String stop = prefs.getString(stationKey);
+    String stop = box.read(stationKey);
 
-    final response = await http.get(
+    var url = Uri.parse(
         '$baseURL?stop=$stop&show_trackchanges=true&show_delays=true&mode=depart&show_tracks=true&limit=30');
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
